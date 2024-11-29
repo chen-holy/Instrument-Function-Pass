@@ -5,6 +5,9 @@ This project records how to call custom instructment functions.
 
 # Simplified Workflow for Custom Instrumentation
 
+In summary, there are three main components: the instrumentation function, the Pass plugin, and the source program.
+
+
 ### step1、Implement Instrumentation Function
 such as：myfunc.cpp
 
