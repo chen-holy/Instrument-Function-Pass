@@ -3,9 +3,27 @@ LLVM11 Dynamic Register Pass Plugin
 
 This project records how to call custom instructment functions.
 
-A basic Module Pass is implemented to insert custom instructment functions into Module functions, tracking which functions are executed.
+# Simplified Workflow for Custom Instrumentation
 
-Custom instructment functions must be compiled into a dynamic library and linked to be accessible during program runtime.
+### step1、Implement Instrumentation Function
+such as：myfunc.cpp
 
-The Pass is dynamically registered and injected into the clang compilation process using the -Xclang option.
+### step2、Compile Instrumentation
+
+
+Convert the function into a dynamic link library and create a symbolic link.
+> For details, refer to the command content.
+
+### step3、Develop Pass Plugin
+Write the plugin in InjectFunctionPass.cpp.
+
+such InjectFunctionPass.cpp
+
+### step4、Compile Pass Plugin
+Build the plugin into a dynamic link library
+> For details, refer to the command content.
+
+### step5、Compile Source Code
+Use clang to compile hello.c, integrating the plugin with the -Xclang flag.
+> For details, refer to the command content.
 
