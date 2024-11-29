@@ -1,0 +1,10 @@
+cd到src目录下
+clang++ `llvm-config --cxxflags` -fPIC -shared InjectFunctionPass.cpp -o InjectFunctionPass.so `llvm-config --ldflags`
+clang++ myfunc.cpp -fPIC -shared -o libmyfunc.so
+
+# 给自定义的插桩函数添加软链接，这样运行时才能找自定义的插桩函数（使用绝对路径）
+ln -s /home/QYgithub/InstrumentFunctionPass/src/libmyfunc.so /usr/lib/libmyfunc.so
+
+# L. 表示自定义插桩函数的动态库链接库在当前目录下
+# -lmyfunc 表示自定义插桩函数的动态库链接库名称是 myfunc
+clang -g -Xclang -load -Xclang ./InjectFunctionPass.so ./hello.c -L. -lmyfunc -o hello
